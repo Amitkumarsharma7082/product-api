@@ -4,7 +4,7 @@ import (
 	"strconv"
 
 	"github.com/Amitkumarsharma7082/product-api/internal/models"
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 )
 
 // All
