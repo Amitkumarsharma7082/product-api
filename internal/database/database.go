@@ -3,7 +3,7 @@ package database
 import (
 	"time"
 
-	"github.com/Amitkumarsharma7082/product-api/internal/models"
+	"github.com/Amitkumarsharma7082/product-api/models"
 )
 
 type Database struct {

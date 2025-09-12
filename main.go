@@ -10,7 +10,7 @@ import (
 
 func main() {
 	app := fiber.New()
-	// Initialize sample data
+	// Initialize DB
 	database.InitializeDatabase()
 
 	// Setup routes
