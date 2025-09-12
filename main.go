@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/Amitkumarsharma7082/product-api/internal/database"
+	"github.com/Amitkumarsharma7082/product-api/database"
 	"github.com/Amitkumarsharma7082/product-api/router"
 	"github.com/gofiber/fiber/v2"
 )
