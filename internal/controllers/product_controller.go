@@ -57,5 +57,5 @@ func DeleteProduct(c *fiber.Ctx) error {
 	}
 
 	delete(models.Products, id)
-	return c.Status(204).SendString("Product deleted")
+	return c.Status(200).JSON(fiber.Map{"message": "Product deleted successfully"})
 }
