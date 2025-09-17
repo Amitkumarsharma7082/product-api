@@ -4,17 +4,21 @@ import (
 	"log"
 
 	"github.com/Amitkumarsharma7082/product-api/database"
-	"github.com/Amitkumarsharma7082/product-api/router"
+	"github.com/Amitkumarsharma7082/product-api/models"
+	"github.com/Amitkumarsharma7082/product-api/server"
 	"github.com/gofiber/fiber/v2"
 )
 
 func main() {
 	app := fiber.New()
 	// Initialize DB
-	database.InitializeDatabase()
+	database.Connect()
+
+	// Auto-migrate Book model to create the table
+	database.DB.AutoMigrate(&models.Product{})
 
 	// Setup routes
-	router.SetupRoutes(app)
+	server.SetupRoutes(app)
 
 	log.Fatal(app.Listen(":3000"))
 }
