@@ -6,10 +6,12 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+var query = database.DB
+
 // All
 func GetProducts(c *fiber.Ctx) error {
 	var products []models.Product
-	database.DB.Find(&products)
+	query.Find(&products)
 	return c.JSON(products)
 }
 
@@ -17,7 +19,7 @@ func GetProducts(c *fiber.Ctx) error {
 func GetProduct(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var product models.Product
-	result := database.DB.First(&product, id)
+	result := query.First(&product, id)
 	if result.Error != nil {
 		return c.Status(404).JSON(fiber.Map{"error": "Product not found"})
 	}
@@ -30,7 +32,7 @@ func CreateProduct(c *fiber.Ctx) error {
 	if err := c.BodyParser(product); err != nil {
 		return c.Status(400).JSON(fiber.Map{"error": "Cannot parse JSON"})
 	}
-	database.DB.Create(&product)
+	query.Create(&product)
 	return c.JSON(product)
 }
 
@@ -38,7 +40,7 @@ func CreateProduct(c *fiber.Ctx) error {
 func UpdateProduct(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var product models.Product
-	if err := database.DB.First(&product, id).Error; err != nil {
+	if err := query.First(&product, id).Error; err != nil {
 		return c.Status(404).JSON(fiber.Map{"error": "Book not found"})
 	}
 
@@ -46,14 +48,14 @@ func UpdateProduct(c *fiber.Ctx) error {
 		return c.Status(400).JSON(fiber.Map{"error": "Cannot parse JSON"})
 	}
 
-	database.DB.Save(&product)
+	query.Save(&product)
 	return c.JSON(product)
 }
 
 // delete
 func DeleteProduct(c *fiber.Ctx) error {
 	id := c.Params("id")
-	result := database.DB.Delete(&models.Product{}, id)
+	result := query.Delete(&models.Product{}, id)
 	if result.RowsAffected == 0 {
 		return c.Status(404).JSON(fiber.Map{"error": "Product not found"})
 	}
