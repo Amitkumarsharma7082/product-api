@@ -3,7 +3,7 @@ package models
 import "time"
 
 type Product struct {
-	ID          int       `json:"id"`
+	ID          int       `json:"id" gorm:"primaryKey"`
 	Name        string    `json:"name"`
 	Description string    `json:"description"`
 	Price       float64   `json:"price"`
@@ -12,9 +12,3 @@ type Product struct {
 	CreatedAt   time.Time `json:"created_at"`
 	UpdatedAt   time.Time `json:"updated_at"`
 }
-
-// in memory storage
-var (
-	Products = make(map[int]Product)
-	LastID   = 0
-)
